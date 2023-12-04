@@ -2,7 +2,11 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="Settings" />
-    <item android:title="History" />
+    <item android:title="Settings"
+        android:id="@+id/menuItemSettings"
+        />
+    <item android:title="History"
+        android:id="@+id/menuItemHistory"
+        />
 
 </menu>
