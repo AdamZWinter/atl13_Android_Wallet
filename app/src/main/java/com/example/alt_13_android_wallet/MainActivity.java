@@ -19,23 +19,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //For testing only
-//        SharedPreferences sharedPreferencesTest = getSharedPreferences(SHAREDPREFS, MODE_PRIVATE);      //Testing only
-//        SharedPreferences.Editor editor = sharedPreferencesTest.edit();
-//        editor.clear().apply();
-
-
-        SharedPreferences sharedPreferences = getSharedPreferences(SHAREDPREFS, MODE_PRIVATE);
-        String email = sharedPreferences.getString(EMAIL_KEY, null);
-        if(email == null){
-            Intent intent = new Intent(getApplicationContext(), InitializeActivity.class);
-            //if needed to pass values in the bundle
-            //otherwise not used
-            Bundle bundle = new Bundle();
-            startActivity(intent, bundle);
-        }else{
-            Log.v("MyTag", email);
-        }
+//        SharedPreferences sharedPreferences = getSharedPreferences(SHAREDPREFS, MODE_PRIVATE);
+//        String email = sharedPreferences.getString(EMAIL_KEY, null);
+//        if(email == null){
+//            Log.v("MyTag", "OnCreate Email is null.");
+//            Intent intent = new Intent(getApplicationContext(), InitializeActivity.class);
+//            //if needed to pass values in the bundle
+//            //otherwise not used
+//            Bundle bundle = new Bundle();
+//            startActivity(intent, bundle);
+//        }else{
+//            Log.v("MyTag", "OnCreate: " + email);
+//        }
     }
 
     @Override
@@ -43,15 +38,15 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         SharedPreferences sharedPreferences = getSharedPreferences(SHAREDPREFS, MODE_PRIVATE);
         String email = sharedPreferences.getString(EMAIL_KEY, null);
-        if(email == null){
-            Log.v("MyTag", "Email is null.");
+        if(email == null || email == ""){
+            Log.v("MyTag", "OnResume Email is null or empty.");
             Intent intent = new Intent(getApplicationContext(), InitializeActivity.class);
             //if needed to pass values in the bundle
             //otherwise not used
             Bundle bundle = new Bundle();
             startActivity(intent, bundle);
         }else{
-            Log.v("MyTag", email);
+            Log.v("MyTag", "OnResume: " + email);
         }
     }
 
@@ -64,9 +59,15 @@ public class MainActivity extends AppCompatActivity {
         int itemID = item.getItemId();
         if(itemID == R.id.menuItemSettings){
             Toast.makeText(getApplicationContext(), "Settings button is clicked", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
         }else if(itemID == R.id.menuItemHistory){
             Toast.makeText(getApplicationContext(), "History button is clicked", Toast.LENGTH_LONG).show();
         }
         return true;
+    }
+
+    public void getAccountByEmail(){
+
     }
 }

@@ -7,7 +7,7 @@
     tools:context=".SettingsActivity">
 
     <Button
-        android:id="@+id/buttonReset"
+        android:id="@+id/buttonSettingsResetAppData"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="212dp"
@@ -17,34 +17,37 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/buttonSettingsRotateKey"
         android:layout_width="243dp"
         android:layout_height="44dp"
         android:layout_marginBottom="224dp"
-        android:text="Update Public Key"
+        android:text="Rotate Public Key"
         app:layout_constraintBottom_toTopOf="@+id/textViewReset"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.357"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textViewCurrentPublicKey"
         android:layout_width="293dp"
         android:layout_height="34dp"
         android:layout_marginBottom="16dp"
         android:text="sdfsdfs.. ........eibfifibif"
-        app:layout_constraintBottom_toTopOf="@+id/button6"
-        tools:layout_editor_absoluteX="60dp" />
+        app:layout_constraintBottom_toTopOf="@+id/buttonSettingsRotateKey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Current Public Key:"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/textViewCurrentPublicKey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.201"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.818"
-        tools:layout_editor_absoluteX="60dp" />
+        app:layout_constraintVertical_bias="0.828" />
 
     <TextView
         android:id="@+id/textViewReset"
@@ -52,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="Delete all user data:"
-        app:layout_constraintBottom_toTopOf="@+id/buttonReset"
+        app:layout_constraintBottom_toTopOf="@+id/buttonSettingsResetAppData"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
