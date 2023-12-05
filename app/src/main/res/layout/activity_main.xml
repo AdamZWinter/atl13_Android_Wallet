@@ -7,13 +7,14 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textViewBalanceAmount"
+        android:id="@+id/textViewMainBalanceAmount"
         android:layout_width="168dp"
         android:layout_height="53dp"
+        android:gravity="center"
         android:layout_marginBottom="156dp"
         android:text="  ♪100.42"
         android:textSize="32sp"
-        app:layout_constraintBottom_toTopOf="@+id/button3"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMainSend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
@@ -23,36 +24,36 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Balance:"
-        app:layout_constraintBottom_toTopOf="@+id/textViewBalanceAmount"
+        app:layout_constraintBottom_toTopOf="@+id/textViewMainBalanceAmount"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.896" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonMainSend"
         android:layout_width="204dp"
         android:layout_height="56dp"
         android:layout_marginBottom="20dp"
         android:text="Send"
-        app:layout_constraintBottom_toTopOf="@+id/button4"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMainReceive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/buttonMainReceive"
         android:layout_width="204dp"
         android:layout_height="56dp"
         android:layout_marginBottom="144dp"
         android:text="Receive"
-        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMainGift"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/buttonMainGift"
         android:layout_width="204dp"
         android:layout_height="56dp"
         android:layout_marginBottom="84dp"

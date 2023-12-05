@@ -8,5 +8,8 @@
     <item android:title="History"
         android:id="@+id/menuItemHistory"
         />
+    <item android:title="Refresh"
+        android:id="@+id/menuItemRefresh"
+        />
 
 </menu>
