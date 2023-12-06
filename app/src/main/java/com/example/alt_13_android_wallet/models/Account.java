@@ -13,21 +13,9 @@ import java.util.Objects;
 @Data
 @NoArgsConstructor
 public class Account implements IAccount{
-
-    @Setter
-    @Getter
     private int id;
-
-    @Setter
-    @Getter
     private String email;
-
-    @Setter
-    @Getter
     private String publicKey;
-
-    @Setter
-    @Getter
     private double balance;
 
     public Account(int id, String email, String publicKey, double balance) {
@@ -67,5 +55,45 @@ public class Account implements IAccount{
     @Override
     public int hashCode() {
         return Objects.hash(getId(), getEmail(), getPublicKey(), getBalance());
+    }
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Override
+    public String getEmail() {
+        return email;
+    }
+
+    @Override
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String getPublicKey() {
+        return publicKey;
+    }
+
+    @Override
+    public void setPublicKey(String publicKey) {
+        this.publicKey = publicKey;
+    }
+
+    @Override
+    public double getBalance() {
+        return balance;
+    }
+
+    @Override
+    public void setBalance(double balance) {
+        this.balance = balance;
     }
 }

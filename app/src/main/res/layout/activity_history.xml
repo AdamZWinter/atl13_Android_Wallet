@@ -8,6 +8,7 @@
     tools:context=".HistoryActivity">
 
     <ListView
+        android:id="@+id/listViewHistory"
         android:layout_width="409dp"
         android:layout_height="729dp" />
 

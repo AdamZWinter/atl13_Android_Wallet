@@ -38,4 +38,6 @@ dependencies {
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     compileOnly("org.projectlombok:lombok:1.18.30")
     annotationProcessor("org.projectlombok:lombok:1.18.30")
+    implementation ("com.fasterxml.jackson.core:jackson-core:2.15.3")
+    implementation ("com.fasterxml.jackson.core:jackson-databind:2.15.3")
 }

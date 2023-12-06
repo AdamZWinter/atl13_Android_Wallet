@@ -73,11 +73,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item){
         int itemID = item.getItemId();
         if(itemID == R.id.menuItemSettings){
-            Toast.makeText(getApplicationContext(), "Settings button is clicked", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "Settings button is clicked", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
             startActivity(intent);
         }else if(itemID == R.id.menuItemHistory){
-            Toast.makeText(getApplicationContext(), "History button is clicked", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(), "History button is clicked", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getApplicationContext(), HistoryActivity.class);
+            startActivity(intent);
         }else if(itemID == R.id.menuItemRefresh){
             getAccountByEmail(account.getEmail());
         }
