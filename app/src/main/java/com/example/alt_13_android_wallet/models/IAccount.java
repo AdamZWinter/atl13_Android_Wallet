@@ -4,8 +4,8 @@ package com.example.alt_13_android_wallet.models;
  * The interface for an account
  */
 public interface IAccount {
-    void setId(int id);
-    int getId();
+    void setId(long id);
+    long getId();
     void setEmail(String email);
     String getEmail();
     void setPublicKey(String publicKey);

@@ -52,7 +52,7 @@ public class InitializeActivity extends AppCompatActivity {
                     Log.v("MyTag", "Posted Account Object:  " + jsonObject);
                     SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.SHAREDPREFS, MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString(MainActivity.ACCOUNT_ID_KEY, jsonObject.getString("id"));
+                    editor.putLong(MainActivity.ACCOUNT_ID_KEY, jsonObject.getLong("id"));
                     editor.putString(MainActivity.EMAIL_KEY, jsonObject.getString(MainActivity.EMAIL_KEY));
                     editor.putString(MainActivity.PUBLIC_KEY_KEY, jsonObject.getString(MainActivity.PUBLIC_KEY_KEY));
                     editor.putString(MainActivity.BALANCE_KEY, jsonObject.getString(MainActivity.BALANCE_KEY));

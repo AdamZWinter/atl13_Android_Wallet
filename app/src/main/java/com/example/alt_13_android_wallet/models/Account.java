@@ -18,12 +18,12 @@ import java.util.Objects;
  */
 @Data
 public class Account implements IAccount{
-    private int id;
+    private long id;
     private String email;
     private String publicKey;
     private double balance;
 
-    public Account(int id, String email, String publicKey, double balance) {
+    public Account(long id, String email, String publicKey, double balance) {
         this.id = id;
         this.email = email;
         this.publicKey = publicKey;
@@ -45,7 +45,7 @@ public class Account implements IAccount{
 
     public static Account fromSharedPreferences(SharedPreferences sharedPreferences){
         Account account = new Account();
-        account.setId(sharedPreferences.getInt(MainActivity.ACCOUNT_ID_KEY, 0));
+        account.setId(sharedPreferences.getLong(MainActivity.ACCOUNT_ID_KEY, 0));
         account.setEmail(sharedPreferences.getString(MainActivity.EMAIL_KEY, "error"));
         //double??
         account.setPublicKey(sharedPreferences.getString(MainActivity.PUBLIC_KEY_KEY, "error"));
@@ -73,12 +73,12 @@ public class Account implements IAccount{
     }
 
     @Override
-    public int getId() {
+    public long getId() {
         return id;
     }
 
     @Override
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
