@@ -87,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public Account getAccountByEmail(String email){
-        String url = "http://sdev372gcvm.topsecondhost.com/api/v1/accounts/"+email;
+        //String url = "http://sdev372gcvm.topsecondhost.com/api/v1/accounts/"+email;
+        String url = "http://192.168.0.23:8080/api/v1/accounts/"+email;
         this.account = new Account(0, "error", "error", 0.0);
         JsonFetcher.fetchJsonData(url, new JsonFetcher.JsonCallback() {
             @Override
@@ -97,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 // Update UI with jsonData
                 try {
                     Log.v("MyTag", "In the try block");
-                    JSONObject jsonObject = new JSONObject(jsonData.substring(7));
+                    JSONObject jsonObject = new JSONObject(jsonData);
                     Log.v("MyTag", "JSON object: " + jsonObject);
                     account.setId(jsonObject.getInt("id"));
                     account.setEmail(email);
