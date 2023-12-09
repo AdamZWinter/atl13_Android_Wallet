@@ -1,5 +1,7 @@
 package com.example.alt_13_android_wallet.models;
 
+import org.json.JSONStringer;
+
 import lombok.*;
 
 import java.util.Objects;
@@ -34,7 +36,6 @@ public class Account implements IAccount{
         this.publicKey = publicKey;
         balance = 100.00;
     }
-
 
 
     @Override

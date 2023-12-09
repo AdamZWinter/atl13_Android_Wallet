@@ -28,6 +28,11 @@ public class InitializeActivity extends AppCompatActivity {
 
     private void initializeNewAccount(View view) {
         String email = editTextNewAccountEmail.getText().toString();
+
+        //String url = "http://sdev372gcvm.topsecondhost.com/api/v1/transactions";
+        String url = "http://192.168.0.23:8080/api/v1/accounts";
+
+
         SharedPreferences sharedPreferences = getSharedPreferences(MainActivity.SHAREDPREFS, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(MainActivity.EMAIL_KEY, email);

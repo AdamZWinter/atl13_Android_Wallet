@@ -31,8 +31,9 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
     public void getTransactions(){
-        String url = "http://sdev372gcvm.topsecondhost.com/api/v1/transactions";
-        //String url = "http://192.168.0.23:8080/api/v1/transactions";
+        //String url = "http://sdev372gcvm.topsecondhost.com/api/v1/transactions";
+        String url = "http://192.168.0.23:8080/api/v1/transactions";
+        Log.v("MyTag", "URL:  " + url);
         JsonFetcher.fetchJsonData(url, new JsonFetcher.JsonCallback() {
             @Override
             public void onSuccess(String jsonData) {
@@ -41,10 +42,8 @@ public class HistoryActivity extends AppCompatActivity {
                 // Update UI with jsonData
                 JSONArray jsonArray = null;
                 try {
-                    //Log.v("MyTag", "In the try block");
-                    //JSONObject jsonObject = new JSONObject(jsonTestString);
+                    Log.v("MyTag", "In the try block");
                     jsonArray = new JSONArray(jsonData);
-                    //Log.v("MyTag", "JSON object: " + jsonObject);
                     Log.v("MyTag", "JSON Array index 0: " + jsonArray.get(0));
 
                 } catch (JSONException e) {
