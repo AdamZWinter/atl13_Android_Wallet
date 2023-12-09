@@ -5,6 +5,7 @@ import android.os.Looper;
 import android.util.Log;
 
 import com.example.alt_13_android_wallet.models.Account;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.json.JSONObject;
 
@@ -34,13 +35,20 @@ public class AccountsPoster {
                     URL url = new URL(urlString);
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
-                    JSONObject jsonObject = new JSONObject((Map) account);
-                    String postData = jsonObject.toString();
+                    ObjectMapper mapper = new ObjectMapper();
+                    //Converting the Object to JSONString
+                    String postData = mapper.writeValueAsString(account);
+                    Log.v("MyTag", "postData: " + postData);
+
+
+                    //JSONObject jsonObject = new JSONObject(account);
+                    //String postData = jsonObject.toString();
 
                     try {
                         // Set up the connection for a POST request
                         urlConnection.setRequestMethod("POST");
                         urlConnection.setDoOutput(true);
+                        urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
 
                         // Write the data to the connection's output stream
                         OutputStream outputStream = urlConnection.getOutputStream();
@@ -63,6 +71,8 @@ public class AccountsPoster {
                             bufferedReader.close();
 
                             final String jsonResponse = stringBuilder.toString();
+                            Log.v("MyTag", "jsonResponse: " + jsonResponse);
+
 
                             // Notify the success with JSON response on the main/UI thread
                             handler.post(new Runnable() {
@@ -81,10 +91,11 @@ public class AccountsPoster {
                             });
                         }//end else
                     } finally {
+                        Log.v("MyTag", "Disconnecting");
                         urlConnection.disconnect();
                     }
                 } catch (Exception e) {
-                    Log.e("AccountsPoser", "Error posting Account", e);
+                    Log.e("MyTag", "Error posting Account", e);
 
                     // Use the handler to update UI from the background thread
                     handler.post(new Runnable() {

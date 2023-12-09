@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String SHAREDPREFS = "ANDROIDCLASS";
     public static final String EMAIL_KEY = "email";
+    public static final String ACCOUNT_ID_KEY = "accountId";
+    public static final String BALANCE_KEY = "balance";
+    public static final String PUBLIC_KEY_KEY = "publicKey";
     public static final Locale locale = Locale.US;
     private Account account;
     private TextView textViewBalance;
@@ -41,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
         buttonSend = findViewById(R.id.buttonMainSend);
         buttonReceive = findViewById(R.id.buttonMainReceive);
         buttonGift = findViewById(R.id.buttonMainGift);
+
+        buttonSend.setOnClickListener(this::sendActivity);
 
     }
 
@@ -121,5 +127,10 @@ public class MainActivity extends AppCompatActivity {
         });
 
         return account;
+    }
+
+    private void sendActivity(View view){
+        Intent intent = new Intent(getApplicationContext(), SendActivity.class);
+        startActivity(intent);
     }
 }

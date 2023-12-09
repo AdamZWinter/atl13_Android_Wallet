@@ -32,7 +32,7 @@
         android:layout_width="293dp"
         android:layout_height="34dp"
         android:layout_marginBottom="16dp"
-        android:text="sdfsdfs.. ........eibfifibif"
+        android:text="error"
         app:layout_constraintBottom_toTopOf="@+id/buttonSettingsRotateKey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
