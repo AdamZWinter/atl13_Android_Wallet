@@ -12,35 +12,48 @@
         android:layout_height="wrap_content"
         android:text="Send"
         android:textSize="32sp"
-        tools:layout_editor_absoluteX="169dp"
-        tools:layout_editor_absoluteY="65dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextSendRecipient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.725" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/editTextSendRecipient"
         android:layout_width="284dp"
         android:layout_height="68dp"
+        android:layout_marginBottom="60dp"
         android:ems="10"
+        android:hint="Recipient Email Address"
         android:inputType="text"
-        android:text="Recipient Email Address"
-        tools:layout_editor_absoluteX="72dp"
-        tools:layout_editor_absoluteY="134dp" />
+        app:layout_constraintBottom_toTopOf="@+id/editTextSendAmount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/editTextSendAmount"
         android:layout_width="282dp"
         android:layout_height="56dp"
+        android:layout_marginBottom="60dp"
         android:ems="10"
+        android:hint="Amount"
         android:inputType="text"
-        android:text="Amount"
-        tools:layout_editor_absoluteX="74dp"
-        tools:layout_editor_absoluteY="226dp" />
+        app:layout_constraintBottom_toTopOf="@+id/button7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="264dp"
         android:text="Send"
-        tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="323dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

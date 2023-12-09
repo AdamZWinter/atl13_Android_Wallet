@@ -1,5 +1,9 @@
 package com.example.alt_13_android_wallet.models;
 
+import android.content.SharedPreferences;
+
+import com.example.alt_13_android_wallet.MainActivity;
+
 import org.json.JSONStringer;
 
 import lombok.*;
@@ -13,7 +17,6 @@ import java.util.Objects;
  * @version see version control
  */
 @Data
-@NoArgsConstructor
 public class Account implements IAccount{
     private int id;
     private String email;
@@ -27,6 +30,9 @@ public class Account implements IAccount{
         this.balance = balance;
     }
 
+    public Account() {
+    }
+
     /**
      * Represents a user account
      * @param email an email address for the user
@@ -37,6 +43,14 @@ public class Account implements IAccount{
         balance = 100.00;
     }
 
+    public static Account fromSharedPreferences(SharedPreferences sharedPreferences){
+        Account account = new Account();
+        account.setId(sharedPreferences.getInt(MainActivity.ACCOUNT_ID_KEY, 0));
+        account.setEmail(sharedPreferences.getString(MainActivity.EMAIL_KEY, "error"));
+        //double??
+        account.setPublicKey(sharedPreferences.getString(MainActivity.PUBLIC_KEY_KEY, "error"));
+        return account;
+    }
 
     @Override
     public String toString() {
