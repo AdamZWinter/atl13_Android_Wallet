@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.alt_13_android_wallet.models.Account;
+import com.example.alt_13_android_wallet.models.DisplayTransaction;
 
 public class SendActivity extends AppCompatActivity {
 
@@ -34,5 +35,10 @@ public class SendActivity extends AppCompatActivity {
         String recipientEmail = editTextRecipient.getText().toString();
         Double amount = Double.parseDouble(editTextAmount.getText().toString());
         Log.v("SendActivity", "recipient: " + recipientEmail + "  amount: " + amount);
+        DisplayTransaction displayTransaction = new DisplayTransaction();
+        displayTransaction.setAccountId(this.thisAccount.getEmail());
+        displayTransaction.setRecipientId(recipientEmail);
+        displayTransaction.setAmount(amount);
+
     }
 }
