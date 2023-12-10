@@ -22,6 +22,7 @@ public class SimpleTransaction extends Transaction{
      */
     public SimpleTransaction(String accountId, int transactionId, String recipientId, double amount, long uTime, String extra) {
         super();
+        super.setTransactionType("Simple");
         Body body = new Body(accountId, transactionId, recipientId, amount, uTime, extra);
         ObjectMapper objectMapper = new ObjectMapper();
         String bodyString;

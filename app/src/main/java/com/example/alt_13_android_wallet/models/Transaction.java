@@ -19,10 +19,11 @@ import lombok.Setter;
  */
 public class Transaction implements ITransaction{
 
+    private String transactionType;
     private int blockId;
     private String bodyString;
-    private String bodyHash;
-    private String hashType;
+    //private String bodyHash;
+    private String hashAlgorithm;
     private String signature;
     private String pki;
 
@@ -43,20 +44,33 @@ public class Transaction implements ITransaction{
      * NoArgs constructor
      */
     public Transaction() {
+        this.hashAlgorithm = "SHA-256";
+        this.pki = "TBD";
     }
 
     @Override
     public String toString() {
-        return "{" +
-                "blockId=" + blockId +
-                ", body='" + bodyString + '\'' +
+        return "Transaction{" +
+                "transactionType='" + transactionType + '\'' +
+                ", blockId=" + blockId +
+                ", bodyString='" + bodyString + '\'' +
+                ", hashAlgorithm='" + hashAlgorithm + '\'' +
                 ", signature='" + signature + '\'' +
+                ", pki='" + pki + '\'' +
                 '}';
+    }
+
+    public String getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(String transactionType) {
+        this.transactionType = transactionType;
     }
 
     public byte[] getBodyHash() {
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            MessageDigest messageDigest = MessageDigest.getInstance(this.hashAlgorithm);
             messageDigest.update(this.bodyString.getBytes(StandardCharsets.UTF_8));
             return messageDigest.digest();
         } catch (NoSuchAlgorithmException e) {
@@ -99,16 +113,16 @@ public class Transaction implements ITransaction{
         this.bodyString = bodyString;
     }
 
-    public void setBodyHash(String bodyHash) {
-        this.bodyHash = bodyHash;
+//    public void setBodyHash(String bodyHash) {
+//        this.bodyHash = bodyHash;
+//    }
+
+    public String getHashAlgorithm() {
+        return hashAlgorithm;
     }
 
-    public String getHashType() {
-        return hashType;
-    }
-
-    public void setHashType(String hashType) {
-        this.hashType = hashType;
+    public void setHashType(String hashAlgorithm) {
+        this.hashAlgorithm = hashAlgorithm;
     }
 
     @Override
