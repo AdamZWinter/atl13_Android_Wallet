@@ -59,16 +59,20 @@ public class HistoryActivity extends AppCompatActivity {
                         try {
                             //Log.v("MyTag", "getting object");
                             JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+
+
                             //Log.v("MyTag", "jsonObject: " + jsonObject);
                             JSONObject body = new JSONObject(jsonObject.get("body").toString());
                             //Log.v("MyTag", "body: " + body);
                             //Log.v("MyTag", "accountId: " + body.getString("accountId"));
+
+
                             DisplayTransaction transaction = new DisplayTransaction();
                             transaction.setAccountId(body.getString("accountId"));
                             transaction.setRecipientId(body.getString("recipientId"));
                             transaction.setAmount(body.getDouble("amount"));
                             transaction.setTransactionId(body.getInt("transactionId"));
-                            transaction.setuTime(body.getLong("utime"));
+                            transaction.setuTime(body.getLong("uTime"));
                             transaction.setExtra(body.getString("extra"));
                             Log.v("MyTag", "Transaction: " + transaction);
                             transactionArrayList.add(transaction);
