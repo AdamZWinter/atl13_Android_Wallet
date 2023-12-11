@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/mainConstraintLayout"
     tools:context=".MainActivity">
 
     <TextView
@@ -47,10 +48,20 @@
         android:layout_height="56dp"
         android:layout_marginBottom="144dp"
         android:text="Receive"
-        app:layout_constraintBottom_toTopOf="@+id/buttonMainGift"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayoutReceive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/frameLayoutReceive"
+        app:layout_constraintBottom_toTopOf="@+id/buttonMainGift"
+        >
+    </FrameLayout>
+
+
 
     <Button
         android:id="@+id/buttonMainGift"
@@ -61,5 +72,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="visible"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

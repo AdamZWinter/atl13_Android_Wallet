@@ -1,6 +1,14 @@
 package com.example.alt_13_android_wallet;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.constraintlayout.widget.Constraints;
+import androidx.core.view.MarginLayoutParamsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,7 +17,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         buttonGift = findViewById(R.id.buttonMainGift);
 
         buttonSend.setOnClickListener(this::sendActivity);
+        buttonReceive.setOnClickListener(this::showQRcodeFragment);
 
     }
 
@@ -132,5 +144,24 @@ public class MainActivity extends AppCompatActivity {
     private void sendActivity(View view){
         Intent intent = new Intent(getApplicationContext(), SendActivity.class);
         startActivity(intent);
+    }
+
+    private void showQRcodeFragment(View view){
+        buttonGift.setVisibility(View.GONE);
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) buttonReceive.getLayoutParams();
+        params.setMargins(0, 0, 0, 200);
+        buttonReceive.setLayoutParams(params);
+        FrameLayout frameLayout = findViewById(R.id.frameLayoutReceive);
+        ConstraintLayout.LayoutParams frameLayoutParams = (ConstraintLayout.LayoutParams) frameLayout.getLayoutParams();
+        frameLayoutParams.setMargins(0, 0, 0, 300);
+        frameLayout.setLayoutParams(frameLayoutParams);
+        replaceQRcodeFragment(new ReceiveFragment());
+    }
+
+    private void replaceQRcodeFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayoutReceive, fragment);
+        fragmentTransaction.commit();
     }
 }
