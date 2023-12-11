@@ -1,12 +1,16 @@
 package com.example.alt_13_android_wallet;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.alt_13_android_wallet.adapters.HistoryCustomAdapter;
@@ -29,22 +33,25 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        listView = findViewById(R.id.listViewHistory);
+
         transactionArrayList = new ArrayList<>();
         getTransactions();
 
-//        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-//            @Override
-//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-//                return false;
-//            }
-//        });
-//
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//
-//            }
-//        });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                showTransactionDialog(position);
+                return false;
+            }
+        });
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showTransactionDialog(position);
+            }
+        });
 
     }
 
@@ -102,7 +109,6 @@ public class HistoryActivity extends AppCompatActivity {
                     }
                 }
                 Log.v("MyTag", "ArrayList: " + transactionArrayList);
-                listView = findViewById(R.id.listViewHistory);
                 HistoryCustomAdapter historyCustomAdapter = new HistoryCustomAdapter(getApplicationContext(), transactionArrayList);
                 listView.setAdapter(historyCustomAdapter);
 
@@ -116,5 +122,47 @@ public class HistoryActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "onError: unable to GET account", Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void showTransactionDialog(int position){
+        DisplayTransaction transaction = transactionArrayList.get(position);
+        AlertDialog.Builder builder = new AlertDialog.Builder(HistoryActivity.this);
+        builder.setTitle("Transaction Details");
+        TextView textViewTransactionDetails = new TextView(HistoryActivity.this);
+
+        String transactionDetails = "Sender: \t" + transaction.getAccountId() + "\n" +
+                "Recipient: \t" + transaction.getRecipientId() + "\n" +
+                "Amount: \t ♪" + transaction.getAmount() + "\n" +
+                "Transaction ID: \t" + transaction.getTransactionId() + "\n" +
+                "Unix Time: \t" + transaction.getuTime() + "\n" +
+                "Additional Info: " + transaction.getExtra() + "\n";
+
+        textViewTransactionDetails.setText(transactionDetails);
+        textViewTransactionDetails.setPadding(40, 10, 10, 10);
+        builder.setView(textViewTransactionDetails);
+//        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                String text = userInput.getText().toString();
+//                colors.add(text);
+//                //Toast.makeText(getApplicationContext(), "This is positive response." + text, Toast.LENGTH_LONG).show();
+//            }
+//        });
+//        builder.setNegativeButton("Remove", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                String text = userInput.getText().toString();
+//                colors.remove(text);
+//                //Toast.makeText(getApplicationContext(), "This is negative response.", Toast.LENGTH_LONG).show();
+//            }
+//        });
+        builder.setNeutralButton("Done", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        builder.show();
+
     }
 }
