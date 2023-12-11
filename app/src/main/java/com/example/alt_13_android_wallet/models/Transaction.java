@@ -20,9 +20,8 @@ import lombok.Setter;
 public class Transaction implements ITransaction{
 
     private String transactionType;
+    private ITransactionBody body;
     private int blockId;
-    private String bodyString;
-    //private String bodyHash;
     private String hashAlgorithm;
     private String signature;
     private String pki;
@@ -34,8 +33,8 @@ public class Transaction implements ITransaction{
      * @param body this should be a JSON formated String will all the details
      * @param signature the signature of the sender on the transaction
      */
-    public Transaction(String body, String signature) {
-        this.bodyString = body;
+    public Transaction(ITransactionBody body, String signature) {
+        this.body = body;
         this.signature = signature;
         this.blockId = 0;
     }
@@ -52,8 +51,8 @@ public class Transaction implements ITransaction{
     public String toString() {
         return "Transaction{" +
                 "transactionType='" + transactionType + '\'' +
+                ", body=" + body +
                 ", blockId=" + blockId +
-                ", bodyString='" + bodyString + '\'' +
                 ", hashAlgorithm='" + hashAlgorithm + '\'' +
                 ", signature='" + signature + '\'' +
                 ", pki='" + pki + '\'' +
@@ -71,7 +70,7 @@ public class Transaction implements ITransaction{
     public byte[] getBodyHash() {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance(this.hashAlgorithm);
-            messageDigest.update(this.bodyString.getBytes(StandardCharsets.UTF_8));
+            messageDigest.update(body.toString().getBytes(StandardCharsets.UTF_8));
             return messageDigest.digest();
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
@@ -81,8 +80,7 @@ public class Transaction implements ITransaction{
     public String getBodyHashString(){
         byte[] bytes = this.getBodyHash();
         Base64.Encoder base64encdoer = Base64.getEncoder();
-        String hash = base64encdoer.encodeToString(bytes);
-        return hash;
+        return base64encdoer.encodeToString(bytes);
     }
 
     @Override
@@ -91,31 +89,19 @@ public class Transaction implements ITransaction{
     }
 
     @Override
-    public void setBody(String body) {
-
+    public void setBody(ITransactionBody body) {
+        this.body = body;
     }
 
     @Override
-    public String getBody() {
-        return null;
+    public ITransactionBody getBody() {
+        return this.body;
     }
 
     @Override
     public void setBlockId(int blockId) {
         this.blockId = blockId;
     }
-
-    public String getBodyString() {
-        return bodyString;
-    }
-
-    public void setBodyString(String bodyString) {
-        this.bodyString = bodyString;
-    }
-
-//    public void setBodyHash(String bodyHash) {
-//        this.bodyHash = bodyHash;
-//    }
 
     public String getHashAlgorithm() {
         return hashAlgorithm;

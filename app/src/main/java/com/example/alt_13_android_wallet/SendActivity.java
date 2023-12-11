@@ -11,6 +11,8 @@ import android.widget.EditText;
 import com.example.alt_13_android_wallet.models.Account;
 import com.example.alt_13_android_wallet.models.DisplayTransaction;
 import com.example.alt_13_android_wallet.models.SimpleTransaction;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.time.Instant;
 
@@ -49,6 +51,12 @@ public class SendActivity extends AppCompatActivity {
         String hash = simpleTransaction.getBodyHashString();    //Todo: Do not use this
         simpleTransaction.setSignature(hash);                   //Todo:  Put actual signature here
         Log.v("SendActivity", "SimpleTransaction: " + simpleTransaction);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            Log.v("SendActivity", mapper.writeValueAsString(simpleTransaction));
+        } catch (JsonProcessingException e) {
+            Log.v("SendActivity", "Not able to write object with mapper.");
+        }
 
 
     }
