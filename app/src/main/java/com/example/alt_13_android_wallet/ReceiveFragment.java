@@ -1,5 +1,6 @@
 package com.example.alt_13_android_wallet;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.example.alt_13_android_wallet.utils.QRcodeGenerator;
+import com.google.zxing.WriterException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,7 +66,14 @@ public class ReceiveFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_receive, container, false);
         ImageView imageView = view.findViewById(R.id.imageViewQRcode);
-        imageView.setImageResource(R.drawable.baseline_qr_code_2_128);
+        QRcodeGenerator generator = new QRcodeGenerator();
+        try {
+            Bitmap bitmap = generator.encodeAsBitmap(mParam1);
+            imageView.setImageBitmap(bitmap);
+        } catch (WriterException e) {
+            throw new RuntimeException(e);
+        }
+        //imageView.setImageResource(R.drawable.baseline_qr_code_2_128);
         return view;
     }
 }

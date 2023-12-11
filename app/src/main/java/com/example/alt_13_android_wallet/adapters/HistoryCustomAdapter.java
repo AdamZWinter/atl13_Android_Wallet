@@ -58,28 +58,6 @@ public class HistoryCustomAdapter extends BaseAdapter {
         TextView textViewAmount = convertView.findViewById(R.id.textViewHistoryAmount);
         ImageView imageView = convertView.findViewById(R.id.imageView2);
 
-//        try {
-//            JSONObject jsonObject = (JSONObject) jsonArray.get(position);
-//            String bodyString = jsonObject.get("body").toString();
-//            //Log.v("MyTag", "JSON object: " + jsonObject);
-//            //Log.v("MyTag", "JSON object body: " + jsonObject.get("body"));
-//            Log.v("MyTag", "body string: " + bodyString);
-//            try {
-//                JSONObject body = new JSONObject(bodyString);
-//                textViewFrom.setText(body.get("accountId").toString());
-//                textViewTo.setText(body.get("recipientId").toString());
-//                imageView.setImageResource(R.drawable.baseline_arrow_right_alt_2424);
-//                textViewAmount.setText(body.get("amount").toString());
-//            } catch (JSONException e) {
-//                //ignore this transaction
-//                textViewFrom.setText("unknown");
-//                textViewTo.setText("unknown");
-//                imageView.setImageResource(R.drawable.baseline_arrow_right_alt_2424);
-//                textViewAmount.setText("");
-//            }
-//        } catch (JSONException e) {
-//            throw new RuntimeException(e);
-//        }
 
         textViewFrom.setText(transactions.get(position).getAccountId());
         textViewTo.setText(transactions.get(position).getRecipientId());

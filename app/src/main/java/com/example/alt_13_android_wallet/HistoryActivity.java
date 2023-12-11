@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,13 +22,29 @@ import java.util.ArrayList;
 
 public class HistoryActivity extends AppCompatActivity {
     ListView listView;
+    ArrayList<DisplayTransaction> transactionArrayList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        transactionArrayList = new ArrayList<>();
         getTransactions();
+
+//        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+//            @Override
+//            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+//                return false;
+//            }
+//        });
+//
+//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//
+//            }
+//        });
 
     }
 
@@ -52,7 +70,6 @@ public class HistoryActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Error: unable to GET account", Toast.LENGTH_LONG).show();
                 }
 
-                ArrayList<DisplayTransaction> transactionArrayList = new ArrayList<>();
                 if(jsonArray != null){
                     Log.v("MyTag", "starting for loop");
                     for (int i = 0; i < jsonArray.length(); i++) {

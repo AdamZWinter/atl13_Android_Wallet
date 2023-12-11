@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
         ConstraintLayout.LayoutParams frameLayoutParams = (ConstraintLayout.LayoutParams) frameLayout.getLayoutParams();
         frameLayoutParams.setMargins(0, 0, 0, 300);
         frameLayout.setLayoutParams(frameLayoutParams);
-        replaceQRcodeFragment(new ReceiveFragment());
+        replaceQRcodeFragment(ReceiveFragment.newInstance("FancyStrings", null));
     }
 
     private void replaceQRcodeFragment(Fragment fragment){
