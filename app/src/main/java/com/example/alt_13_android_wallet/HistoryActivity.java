@@ -62,7 +62,10 @@ public class HistoryActivity extends AppCompatActivity {
 
 
                             //Log.v("MyTag", "jsonObject: " + jsonObject);
-                            JSONObject body = new JSONObject(jsonObject.get("body").toString());
+
+                            //JSONObject body = new JSONObject(jsonObject.get("body").toString());
+                            JSONObject body = jsonObject.getJSONObject("body");
+
                             //Log.v("MyTag", "body: " + body);
                             //Log.v("MyTag", "accountId: " + body.getString("accountId"));
 
