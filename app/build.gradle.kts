@@ -40,4 +40,5 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.30")
     implementation ("com.fasterxml.jackson.core:jackson-core:2.15.3")
     implementation ("com.fasterxml.jackson.core:jackson-databind:2.15.3")
+    implementation ("com.google.zxing:zxing-parent:3.5.2")
 }

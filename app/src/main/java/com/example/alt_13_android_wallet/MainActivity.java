@@ -56,16 +56,16 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(SHAREDPREFS, MODE_PRIVATE);
         String email = sharedPreferences.getString(EMAIL_KEY, null);
         if(email == null || email == ""){
-            Log.v("MyTag", "OnResume Email is null or empty.");
+            Log.v("MainActivity", "OnResume Email is null or empty.");
             Intent intent = new Intent(getApplicationContext(), InitializeActivity.class);
             //if needed to pass values in the bundle
             //otherwise not used
             Bundle bundle = new Bundle();
             startActivity(intent, bundle);
         }else{
-            Log.v("MyTag", "OnResume: " + email);
+            Log.v("MainActivity", "OnResume: " + email);
             getAccountByEmail(email);
-            Log.v("MyTag", "Account result: " + account.toString());
+            Log.v("MainActivity", "Account result: " + account.toString());
             //textViewBalance.setText(Double.toString(account.getBalance()));
             textViewBalance.setText(String.format(locale, "%.2f", account.getBalance()));
         }
@@ -100,12 +100,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String jsonData) {
                 // Handle successful JSON response
-                Log.d("MyTag", "JSON data: " + jsonData);
+                Log.d("MainActivity", "JSON data: " + jsonData);
                 // Update UI with jsonData
                 try {
-                    Log.v("MyTag", "In the try block");
+                    Log.v("MainActivity", "In the try block");
                     JSONObject jsonObject = new JSONObject(jsonData);
-                    Log.v("MyTag", "JSON object: " + jsonObject);
+                    Log.v("MainActivity", "JSON object: " + jsonObject);
                     account.setId(jsonObject.getInt("id"));
                     account.setEmail(email);
                     account.setPublicKey(jsonObject.getString("publicKey"));
@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                     textViewBalance.setText("♪"+Double.toString(account.getBalance()));
                 } catch (JSONException e) {
                     //throw new RuntimeException(e);
-                    Log.v("MyTag", "failed to make jsonObject");
+                    Log.v("MainActivity", "failed to make jsonObject");
                     Toast.makeText(getApplicationContext(), "Error: unable to GET account", Toast.LENGTH_LONG).show();
                 }
             }
@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onError(String errorMessage) {
                 // Handle error case
-                Log.e("MyTag", "Error: " + errorMessage);
+                Log.e("MainActivity", "onError: " + errorMessage);
                 // Display error message to the user
             }
         });

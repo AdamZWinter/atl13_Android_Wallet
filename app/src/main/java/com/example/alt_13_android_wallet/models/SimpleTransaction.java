@@ -17,7 +17,7 @@ public class SimpleTransaction extends Transaction{
      */
     public SimpleTransaction(String accountId, int transactionId, String recipientId, double amount, long uTime, String extra) {
         super();
-        super.setTransactionType("Simple");
+        super.setTransactionType("SIMPLE");
         SimpleTransactionBody body = new SimpleTransactionBody(accountId, transactionId, recipientId, amount, uTime, extra);
         super.setBody(body);
         //super.setSignature(base64encodedSignature);

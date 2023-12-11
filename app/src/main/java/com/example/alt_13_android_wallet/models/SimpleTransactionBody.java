@@ -13,7 +13,7 @@ public class SimpleTransactionBody implements ITransactionBody {
     private String extra;
 
     SimpleTransactionBody(String accountId, int transactionId, String recipientId, double amount, long uTime, String extra){
-        this.bodyType = "simple";
+        this.bodyType = "SIMPLE";
         this.accountId = accountId;
         this.transactionId = transactionId;
         this.recipientId = recipientId;

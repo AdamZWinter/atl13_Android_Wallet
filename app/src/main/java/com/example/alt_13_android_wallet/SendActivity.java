@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.alt_13_android_wallet.models.Account;
 import com.example.alt_13_android_wallet.models.SimpleTransaction;
@@ -66,19 +67,15 @@ public class SendActivity extends AppCompatActivity {
             @Override
             public void onSuccess(String jsonData) {
                 Log.v("SendActivity", "Transaction POST success, jsonData: " + jsonData);
-                if(Boolean.parseBoolean(jsonData)){
-
+                //Boolean success = Boolean.parseBoolean(jsonData.trim());
+                if(Boolean.parseBoolean(jsonData.trim())){
+                    Toast.makeText(getApplicationContext(), "Sent.", Toast.LENGTH_LONG).show();
+                    finish();
                 }else{
-
+                    Toast.makeText(getApplicationContext(), "Error.  See Logs.", Toast.LENGTH_LONG).show();
+                    Log.e("SendActivity", "Send response jsonData: " + jsonData);
                 }
 
-//                JSONObject jsonObject = null;
-//                try {
-//                    jsonObject = new JSONObject(jsonData);
-//                    Log.v("SendActivity", "Posted Account Object:  " + jsonObject);
-//                } catch (JSONException e) {
-//                    throw new RuntimeException(e);
-//                }
             }
 
             @Override
