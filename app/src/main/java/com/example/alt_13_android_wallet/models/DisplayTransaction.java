@@ -16,6 +16,7 @@ public class DisplayTransaction{
     private double amount;
     private long uTime;
     private String extra;
+    private String signature;
 
     /**
      * Constructor
@@ -26,13 +27,14 @@ public class DisplayTransaction{
      * @param uTime  a time stamp set by the sender
      * @param extra  additional information to include
      */
-    public DisplayTransaction(String accountId, int transactionId, String recipientId, double amount, long uTime, String extra) {
+    public DisplayTransaction(String accountId, int transactionId, String recipientId, double amount, long uTime, String extra, String signature) {
         this.accountId = accountId;
         this.transactionId = transactionId;
         this.recipientId = recipientId;
         this.amount = amount;
         this.uTime = uTime;
         this.extra = extra;
+        this.signature = signature;
     }
 
     public DisplayTransaction() {
@@ -87,6 +89,24 @@ public class DisplayTransaction{
         this.extra = extra;
     }
 
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
+    }
+
+    public String getSignatureAbbreviated(){
+        if(signature.length() > 48){
+            String start = signature.substring(0, 16);
+            String end = signature.substring(signature.length()-16);
+            return start + "....." + end;
+        }else{
+            return signature;
+        }
+    }
+
     @Override
     public String toString() {
         return "DisplayTransaction{" +
@@ -96,6 +116,7 @@ public class DisplayTransaction{
                 ", amount=" + amount +
                 ", uTime=" + uTime +
                 ", extra='" + extra + '\'' +
+                ", signature='" + getSignatureAbbreviated() + '\'' +
                 '}';
     }
 }

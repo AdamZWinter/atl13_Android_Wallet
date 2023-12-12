@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String BALANCE_KEY = "balance";
     public static final String PUBLIC_KEY_KEY = "publicKey";
     public static final Locale locale = Locale.US;
+    public static final String KEYSTORE_ALIAS = "alt13keystore";
     private Account account;
     private TextView textViewBalance;
     private Button buttonSend;
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         ConstraintLayout.LayoutParams frameLayoutParams = (ConstraintLayout.LayoutParams) frameLayout.getLayoutParams();
         frameLayoutParams.setMargins(0, 0, 0, 300);
         frameLayout.setLayoutParams(frameLayoutParams);
-        replaceQRcodeFragment(ReceiveFragment.newInstance("FancyStrings", null));
+        replaceQRcodeFragment(ReceiveFragment.newInstance(account.getEmail(), null));
     }
 
     private void replaceQRcodeFragment(Fragment fragment){

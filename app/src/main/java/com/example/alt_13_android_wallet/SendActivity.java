@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.KeyStore;
+import java.security.KeyStoreException;
+import java.security.NoSuchAlgorithmException;
+import java.security.Signature;
+import java.security.SignatureException;
+import java.security.UnrecoverableEntryException;
+import java.security.cert.CertificateException;
 import java.time.Instant;
 
 public class SendActivity extends AppCompatActivity {
@@ -26,6 +37,7 @@ public class SendActivity extends AppCompatActivity {
     Account thisAccount;
     EditText editTextRecipient;
     EditText editTextAmount;
+    EditText editTextMessage;
 
     Button buttonSend;
     @Override
@@ -36,14 +48,15 @@ public class SendActivity extends AppCompatActivity {
         thisAccount = Account.fromSharedPreferences(getSharedPreferences("ANDROIDCLASS", MODE_PRIVATE));
         editTextRecipient = findViewById(R.id.editTextSendRecipient);
         editTextAmount = findViewById(R.id.editTextSendAmount);
+        editTextMessage = findViewById(R.id.editTextSendMessage);
         buttonSend = findViewById(R.id.buttonSend);
         buttonSend.setOnClickListener(this::postTransaction);
-
     }
 
     private void postTransaction(View view){
         String recipientEmail = editTextRecipient.getText().toString();
         Double amount = Double.parseDouble(editTextAmount.getText().toString());
+        String message = editTextMessage.getText().toString();
         Log.v("SendActivity", "recipient: " + recipientEmail + "  amount: " + amount);
         SimpleTransaction simpleTransaction = new SimpleTransaction(
                 this.thisAccount.getEmail(),
@@ -51,10 +64,41 @@ public class SendActivity extends AppCompatActivity {
                 recipientEmail,
                 amount,
                 Instant.now().getEpochSecond(),
-                "jsonEncodedStringExtra"
+                message
         );
         String hash = simpleTransaction.getBodyHashString();    //Todo: Do not use this
         simpleTransaction.setSignature(hash);                   //Todo:  Put actual signature here
+
+        try {
+            KeyStore keyStore = KeyStore.getInstance("AndroidKeyStore");
+            keyStore.load(null);
+            KeyStore.Entry entry = keyStore.getEntry(MainActivity.KEYSTORE_ALIAS, null);
+            if (!(entry instanceof KeyStore.PrivateKeyEntry)) {
+                Log.w("Crypto", "Not an instance of a PrivateKeyEntry");
+                Toast.makeText(getApplicationContext(), "No PrivateKey found in KeyStore", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            Signature s = Signature.getInstance("SHA256withECDSA");
+            s.initSign(((KeyStore.PrivateKeyEntry) entry).getPrivateKey());
+            s.update(simpleTransaction.getBodyHash());
+            byte[] signature = s.sign();
+            simpleTransaction.setSignature(Base64.encodeToString(signature, Base64.DEFAULT));
+        } catch (KeyStoreException e) {
+            throw new RuntimeException(e);
+        } catch (CertificateException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        } catch (UnrecoverableEntryException e) {
+            throw new RuntimeException(e);
+        } catch (InvalidKeyException e) {
+            throw new RuntimeException(e);
+        } catch (SignatureException e) {
+            throw new RuntimeException(e);
+        }
+
         Log.v("SendActivity", "SimpleTransaction: " + simpleTransaction);
         ObjectMapper mapper = new ObjectMapper();
         try {

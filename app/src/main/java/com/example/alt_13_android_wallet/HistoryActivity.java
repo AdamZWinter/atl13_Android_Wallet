@@ -101,6 +101,7 @@ public class HistoryActivity extends AppCompatActivity {
                             transaction.setTransactionId(body.getInt("transactionId"));
                             transaction.setuTime(body.getLong("uTime"));
                             transaction.setExtra(body.getString("extra"));
+                            transaction.setSignature(jsonObject.getString("signature"));
                             Log.v("MyTag", "Transaction: " + transaction);
                             transactionArrayList.add(transaction);
                         } catch (JSONException e) {
@@ -135,7 +136,9 @@ public class HistoryActivity extends AppCompatActivity {
                 "Amount: \t ♪" + transaction.getAmount() + "\n" +
                 "Transaction ID: \t" + transaction.getTransactionId() + "\n" +
                 "Unix Time: \t" + transaction.getuTime() + "\n" +
-                "Additional Info: " + transaction.getExtra() + "\n";
+                "Additional Info: " + transaction.getExtra() + "\n" +
+                "Signature:   " + transaction.getSignature() + "\n"
+                ;
 
         textViewTransactionDetails.setText(transactionDetails);
         textViewTransactionDetails.setPadding(40, 10, 10, 10);
